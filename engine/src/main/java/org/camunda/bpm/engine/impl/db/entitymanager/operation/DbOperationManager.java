@@ -157,24 +157,23 @@ public class DbOperationManager {
     modifiedEntityTypes.addAll(deletes.keySet());
     modifiedEntityTypes.addAll(bulkOperations.keySet());
 
-    for (Class<?> type : modifiedEntityTypes) {
-      // first perform entity UPDATES
-      addSortedModificationsForType(type, updates.get(type), flush);
-      // next perform entity DELETES
-      addSortedModificationsForType(type, deletes.get(type), flush);
-    }
-
     //the very last perform bulk operations for which the order is important
     if(bulkOperationsInsertionOrder != null) {
       flush.addAll(bulkOperationsInsertionOrder);
     }
 
     for (Class<?> type : modifiedEntityTypes) {
+      // first perform entity UPDATES
+      addSortedModificationsForType(type, updates.get(type), flush);
+      // next perform entity DELETES
+      addSortedModificationsForType(type, deletes.get(type), flush);
+      // last perform bulk operations
       SortedSet<DbBulkOperation> bulkOperationsForType = bulkOperations.get(type);
       if(bulkOperationsForType != null) {
         flush.addAll(bulkOperationsForType);
       }
     }
+
   }
 
   protected void addSortedModificationsForType(Class<?> type, SortedSet<DbEntityOperation> preSortedOperations, List<DbOperation> flush) {
