@@ -80,7 +80,7 @@ public class HistoricBatchManager extends AbstractManager {
     commandContext.getHistoricIncidentManager().deleteHistoricIncidentsByBatchId(historicBatchIds);
     commandContext.getHistoricJobLogManager().deleteHistoricJobLogByBatchIds(historicBatchIds);
 
-    getDbEntityManager().deletePreserveOrder(HistoricBatchEntity.class, "deleteHistoricBatchByIds", historicBatchIds);
+    getDbEntityManager().delete(HistoricBatchEntity.class, "deleteHistoricBatchByIds", historicBatchIds);
 
   }
 

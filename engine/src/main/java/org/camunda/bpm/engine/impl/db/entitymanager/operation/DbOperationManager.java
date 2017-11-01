@@ -162,16 +162,18 @@ public class DbOperationManager {
       addSortedModificationsForType(type, updates.get(type), flush);
       // next perform entity DELETES
       addSortedModificationsForType(type, deletes.get(type), flush);
-      // last perform bulk operations
-      SortedSet<DbBulkOperation> bulkOperationsForType = bulkOperations.get(type);
-      if(bulkOperationsForType != null) {
-        flush.addAll(bulkOperationsForType);
-      }
     }
 
     //the very last perform bulk operations for which the order is important
     if(bulkOperationsInsertionOrder != null) {
       flush.addAll(bulkOperationsInsertionOrder);
+    }
+
+    for (Class<?> type : modifiedEntityTypes) {
+      SortedSet<DbBulkOperation> bulkOperationsForType = bulkOperations.get(type);
+      if(bulkOperationsForType != null) {
+        flush.addAll(bulkOperationsForType);
+      }
     }
   }
 

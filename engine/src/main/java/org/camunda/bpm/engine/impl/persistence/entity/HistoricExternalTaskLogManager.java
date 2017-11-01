@@ -52,7 +52,7 @@ public class HistoricExternalTaskLogManager extends AbstractManager {
 
   public void deleteHistoricExternalTaskLogsByProcessInstanceIds(List<String> processInstanceIds) {
     deleteExceptionByteArrayByParameterMap("processInstanceIdIn", processInstanceIds.toArray());
-    getDbEntityManager().deletePreserveOrder(HistoricExternalTaskLogEntity.class, "deleteHistoricExternalTaskLogByProcessInstanceIds", processInstanceIds);
+    getDbEntityManager().delete(HistoricExternalTaskLogEntity.class, "deleteHistoricExternalTaskLogByProcessInstanceIds", processInstanceIds);
   }
 
   // byte array delete ////////////////////////////////////////////////////////

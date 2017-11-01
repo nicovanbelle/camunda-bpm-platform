@@ -55,7 +55,7 @@ public class HistoricVariableInstanceManager extends AbstractHistoricManager {
 
   protected void deleteHistoricVariableInstances(Map<String, Object> parameters) {
     getDbEntityManager().deletePreserveOrder(ByteArrayEntity.class, "deleteHistoricVariableInstanceByteArraysByIds", parameters);
-    getDbEntityManager().deletePreserveOrder(HistoricVariableInstanceEntity.class, "deleteHistoricVariableInstanceByIds", parameters);
+    getDbEntityManager().delete(HistoricVariableInstanceEntity.class, "deleteHistoricVariableInstanceByIds", parameters);
   }
 
   protected void deleteHistoricVariableInstancesByProcessCaseInstanceId(String historicProcessInstanceId, String historicCaseInstanceId) {

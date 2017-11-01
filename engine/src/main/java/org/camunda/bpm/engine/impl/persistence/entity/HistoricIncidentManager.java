@@ -37,7 +37,7 @@ public class HistoricIncidentManager extends AbstractHistoricManager {
   }
 
   public void deleteHistoricIncidentsByProcessInstanceIds(List<String> processInstanceIds) {
-    getDbEntityManager().deletePreserveOrder(HistoricIncidentEntity.class, "deleteHistoricIncidentsByProcessInstanceIds", processInstanceIds);
+    getDbEntityManager().delete(HistoricIncidentEntity.class, "deleteHistoricIncidentsByProcessInstanceIds", processInstanceIds);
   }
 
   public void deleteHistoricIncidentsByProcessDefinitionId(String processDefinitionId) {

@@ -54,7 +54,7 @@ public class HistoricDetailManager extends AbstractHistoricManager {
 
   public void deleteHistoricDetails(Map<String, Object> parameters) {
     getDbEntityManager().deletePreserveOrder(ByteArrayEntity.class, "deleteHistoricDetailByteArraysByIds", parameters);
-    getDbEntityManager().deletePreserveOrder(HistoricDetailEventEntity.class, "deleteHistoricDetailsByIds", parameters);
+    getDbEntityManager().delete(HistoricDetailEventEntity.class, "deleteHistoricDetailsByIds", parameters);
   }
 
 
